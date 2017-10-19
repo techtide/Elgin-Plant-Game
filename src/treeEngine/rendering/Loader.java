@@ -31,13 +31,15 @@ public class Loader {
     /**
      * Creates primitive model with given vertex positions to render.
      * @param positions - Vertex coordinates for model
+     * @param textureCoords - Coordinates used for texturing a model.
      * @param indices - Indices for model (improves performace up to 40%)
      * @return - RawModel created.
      */
-    public RawModel loadToVAO(float[] positions, int[] indices) {
+    public RawModel loadToVAO(float[] positions, float[] textureCoords, int[] indices) {
         int vaoID = createVAO();
         bindIndicesVBO(indices);
         storeDataInAttributeList(0, 3, positions);
+        storeDataInAttributeList(1, 2, textureCoords);
         unbindVAO();
         return new RawModel(vaoID, indices.length);
     }
