@@ -1,5 +1,8 @@
 package treeEngine.rendering;
 
+import elgin.data.Reference;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
 import treeEngine.models.RawModel;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -7,6 +10,8 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -21,6 +26,7 @@ public class Loader {
     //VAO and VBO list for tracking
     private List<Integer> vaos = new ArrayList<>();
     private List<Integer> vbos = new ArrayList<>();
+    private List<Integer> textures = new ArrayList<>();
 
     /**
      * Creates primitive model with given vertex positions to render.
@@ -34,6 +40,33 @@ public class Loader {
         storeDataInAttributeList(0, 3, positions);
         unbindVAO();
         return new RawModel(vaoID, indices.length);
+    }
+
+    /**
+     * Loads a texture from file, under resources/assets/ folder type / file name.png
+     * @param fileName - Name of the texture
+     * @param folderType - Used to find the texture since it's organized.
+     * @return - TextureID used for program
+     */
+    public int loadTexture(String fileName, int folderType) {
+        Texture texture = null;
+
+        String folderName = "textures";
+        if(folderType == Reference.LOADER_MAPS_FOLDER) folderName = "maps";
+        if(folderType == Reference.LOADER_NORMALS_FOLDER) folderName = "normals";
+        if(folderType == Reference.LOADER_FONTS_FOLDER) folderName = "fonts";
+        if(folderType == Reference.LOADER_PARTICLES_FOLDER) folderName = "particles";
+        if(folderType == Reference.LOADER_SPECULARS_FOLDER) folderName = "speculars";
+
+        try {
+            texture = TextureLoader.getTexture("PNG", Class.class.getResourceAsStream("/assets/" + folderName + "/" + fileName + ".png"));
+        } catch (IOException e) {
+            System.err.println("Failed to load texture: " + "/assets/" + folderName + "/" + fileName + ".png");
+        }
+
+        int textureID = texture.getTextureID();
+        textures.add(textureID);
+        return textureID;
     }
 
     /**
@@ -57,6 +90,10 @@ public class Loader {
 
         for(int vbo: vbos) {
             GL15.glDeleteBuffers(vbo);
+        }
+
+        for(int texture: textures) {
+            GL11.glDeleteTextures(texture);
         }
     }
 
