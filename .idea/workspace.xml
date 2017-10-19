@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c7f53b7-641c-474c-9a3e-29e29f03f66b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/treeEngine/models/ModelTexture.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/treeEngine/models/TexturedModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Elgin.iml" afterPath="$PROJECT_DIR$/Elgin.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/treeEngine/rendering/Loader.java" afterPath="$PROJECT_DIR$/src/treeEngine/rendering/Loader.java" />
-    </list>
+    <list default="true" id="4c7f53b7-641c-474c-9a3e-29e29f03f66b" name="Default" comment="" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,9 +90,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/treeEngine/rendering/Loader.java" />
         <option value="$PROJECT_DIR$/src/treeEngine/models/ModelTexture.java" />
         <option value="$PROJECT_DIR$/src/treeEngine/models/TexturedModel.java" />
+        <option value="$PROJECT_DIR$/src/treeEngine/rendering/Loader.java" />
       </list>
     </option>
   </component>
@@ -406,7 +400,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -581,10 +574,10 @@
         <state relative-caret-position="48">
           <caret line="3" column="54" lean-forward="false" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
           <folding>
-            <element signature="e#180#181#0" expanded="true" />
-            <element signature="e#215#216#0" expanded="true" />
-            <element signature="e#248#249#0" expanded="true" />
-            <element signature="e#280#281#0" expanded="true" />
+            <element signature="e#180#181#0" expanded="false" />
+            <element signature="e#215#216#0" expanded="false" />
+            <element signature="e#248#249#0" expanded="false" />
+            <element signature="e#280#281#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -593,12 +586,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="3" column="59" lean-forward="false" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
-          <folding>
-            <element signature="e#361#362#0" expanded="true" />
-            <element signature="e#392#393#0" expanded="true" />
-            <element signature="e#432#433#0" expanded="true" />
-            <element signature="e#462#463#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
