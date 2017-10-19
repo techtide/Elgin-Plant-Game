@@ -1,3 +1,0 @@
-Name: Plantbase
-Looks: Blue (#4084c4) and a black circle in the center
-Holds all plant data. You can refer back to it and look at what you have so far.

@@ -1,0 +1,4 @@
+Customisable outfit?
+-Limited number of outfits
+Make name and gender custom
+Can eqiup items (Gloves, hats, etc.)
