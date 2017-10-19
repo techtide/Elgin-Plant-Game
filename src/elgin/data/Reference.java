@@ -18,7 +18,7 @@ public class Reference {
     public static final Vector4f DEFAULT_BACKGROUND_COLOR = new Vector4f(0.1f, 0.8f, 0.8f, 1f);
 
     //Loader
-    public static final int LOADER_TEXTURES_FOLDER = 0;
+    public static final int LOADER_TEXTURES_FOLDER = 0; // Not needed just a default value.
     public static final int LOADER_MAPS_FOLDER = 1;
     public static final int LOADER_NORMALS_FOLDER = 2;
     public static final int LOADER_FONTS_FOLDER = 3;
