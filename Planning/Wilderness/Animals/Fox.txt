@@ -1,0 +1,12 @@
+Fox
+HP:50
+DMG: 7 per hit
+Fur color:#ad530f
+
+Will only attack if:
+-Camp has no light source
+-Food left around
+- If attacked in the wilderness (Will not attack if approached, just will attack if attacked)
+
+
+One of the main animals that will attack early game

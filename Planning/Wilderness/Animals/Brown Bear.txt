@@ -1,0 +1,10 @@
+Brown Bear
+HP: 150
+DMG: 25 each hit
+Fur color: #634107
+
+Only will attack you if:
+-You come near it
+- Camp does not have torches around it
+
+Probably will not attack early game

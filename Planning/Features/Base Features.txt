@@ -1,9 +1,11 @@
 Finding plants and recording them
 -Store plants/naming them
+In database, collecting samples with tools
 -Using special tools for poisonus plants
 
 At night wild animals can hurt you
-
+Foxes- Very low damage
+Bears- Very high damage
 Basic Needs
 -Food
 -Water
