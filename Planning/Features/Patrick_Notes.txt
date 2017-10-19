@@ -1,0 +1,20 @@
+Possible things I KNOW I can add:
+
+//All branched under one big task
+Save game- might be complicated but can do
+Multiple games at one time?
+Load game
+
+//Tools and such
+Finding plants and recording them
+-Store plants/naming them
+-Using special tools for poisonous plants
+
+//Will put in after base game, want to focus on the core then move to the survival part
+Dying and player needs
+
+Customize character- doable with PlayerSkin(head, body, shoes, gender, skinColor);
+Use Reference class to get values for each (texture paths for clothing, vec3 color, stuff like that)
+
+*Arman, might want to figure out the way to do this, I have ideas but nothing solid*
+put those things here:
