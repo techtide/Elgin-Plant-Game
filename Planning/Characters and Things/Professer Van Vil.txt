@@ -1,0 +1,6 @@
+Shirt:#8796af
+Labcoat:#d1d1d1
+Hair:#826641
+Pants:#514f4b
+Shoes:#704e0b
+
