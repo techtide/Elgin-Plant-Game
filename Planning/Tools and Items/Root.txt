@@ -1,7 +1,23 @@
 Name: Root
 Looks: Blue (#4084c4) and a black circle in the center
-Holds all plant data. You can refer back to it and look at what you have so far.
-Used to store plant samples.
-You can go on it and see what samples you have collected. 
-It will say number of plants out of total. Ex. 3/6
-You can go into a specific one and read data on it.
+
+WHAT IT DOES:
+Holds plant samples. Once a sample is collected, it will be put in the database.
+At any time, you can access it and it will show what you have collected.
+You will be able to also go into a specific one and it will show it's data. This data includes
+-Poisonous levels and effects
+-Area found
+-Scientific name
+-Name you have chosen
+
+It will also say how many plant samples you have out of all of them. (Ex. 3/6)
+If a plant swab is taken, it will show if it is poisonous or not.
+
+
+
+
+
+
+
+
+

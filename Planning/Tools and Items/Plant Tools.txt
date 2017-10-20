@@ -13,3 +13,7 @@ Thick Gloves (Equipped)
 Same Syringe
 Reinforced Vial
 (#605e5c, not clear)
+----------------------------------------------------------------------------------------------
+To swab a plant:
+Swabber (#e5e5e5)
+Used to tell if a plant is poisonous or not.
