@@ -45,6 +45,10 @@ public class EntityShader extends ShaderProgram {
         viewMatrix = new UniformMat4("viewMatrix", this.getProgramID());
     }
 
+    /**
+     * Loads the camera's view matrix to the shader to transform objects.
+     * @param camera - the camera that is used for the view matrix.
+     */
     public void loadCameraViewMatrix(Camera camera) {
         Matrix4f matrix = Maths.createViewMatrix(camera);
         viewMatrix.loadData(matrix);

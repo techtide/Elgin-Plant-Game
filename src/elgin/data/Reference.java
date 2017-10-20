@@ -22,6 +22,9 @@ public class Reference {
     //Camera
     public static final float CAM_SHIFT = 2.5f;
 
+    //OBJ Loader
+    public static final String OBJ_LOADER_RES_LOC = "/assets/models/";
+
     //Loader
     public static final int LOADER_TEXTURES_FOLDER = 0; // Not needed just a default value.
     public static final int LOADER_MAPS_FOLDER = 1;

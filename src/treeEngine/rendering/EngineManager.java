@@ -7,6 +7,8 @@ import treeEngine.entities.Entity;
 import treeEngine.models.ModelTexture;
 import treeEngine.models.RawModel;
 import treeEngine.models.TexturedModel;
+import treeEngine.objLoader.ModelData;
+import treeEngine.objLoader.OBJFileLoader;
 import treeEngine.shaders.entities.EntityShader;
 
 import java.util.ArrayList;
@@ -114,10 +116,11 @@ public class EngineManager {
         renderer = new EntityRenderer(entityShader);
         camera = new Camera();
 
-        RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("hqdefault", Reference.LOADER_TEXTURES_FOLDER));
+        ModelData modelData = OBJFileLoader.loadOBJ("lowPolyTree");
+        RawModel model = loader.loadToVAO(modelData.getVertices(), modelData.getTextureCoords(), modelData.getIndices());
+        ModelTexture texture = new ModelTexture(loader.loadTexture("lowPolyTree", Reference.LOADER_TEXTURES_FOLDER));
         TexturedModel texturedModel = new TexturedModel(model, texture);
-        entities.add(new Entity(texturedModel, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 1f));
+        entities.add(new Entity(texturedModel, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 0.05f));
     }
 
     /**
