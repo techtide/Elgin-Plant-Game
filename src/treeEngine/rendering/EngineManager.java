@@ -1,6 +1,9 @@
 package treeEngine.rendering;
 
+import elgin.data.Reference;
+import treeEngine.models.ModelTexture;
 import treeEngine.models.RawModel;
+import treeEngine.models.TexturedModel;
 import treeEngine.shaders.entities.EntityShader;
 
 import java.util.ArrayList;
@@ -13,18 +16,22 @@ public class EngineManager {
     private static Renderer renderer;
     private static EntityShader entityShader;
 
-    private static List<RawModel> models = new ArrayList<>();
+    private static List<TexturedModel> models = new ArrayList<>();
 
     private static float[] vertices = {
-            -0.5f, 0.5f, 0f,
-            -0.5f, -0.5f, 0f,
-            0.5f, -0.5f, 0f,
-            0.5f, 0.5f, 0f
+            -0.3f, 0.5f, 0f,
+            -0.3f, -0.5f, 0f,
+            0.3f, -0.5f, 0f,
+            0.3f, 0.5f, 0f
     };
 
     private static int[] indices = {
             0, 1, 3,
             3, 1, 2
+    };
+
+    private static float[] textureCoords = {
+            0, 0,   0, 1,   1, 1,    1, 0
     };
 
     //END of inits
@@ -39,7 +46,10 @@ public class EngineManager {
         renderer = new Renderer();
         entityShader = new EntityShader();
 
-        models.add(loader.loadToVAO(vertices, indices));
+        RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
+        ModelTexture texture = new ModelTexture(loader.loadTexture("monkeyFace", Reference.LOADER_TEXTURES_FOLDER));
+        TexturedModel texturedModel = new TexturedModel(model, texture);
+        models.add(texturedModel);
     }
 
     /**

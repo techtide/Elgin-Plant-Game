@@ -42,14 +42,14 @@ public abstract class ShaderProgram {
         bindAttributes();
         GL20.glLinkProgram(programID);
         GL20.glValidateProgram(programID);
-        getAllUniformLocations();
+        initUniforms();
     }
 
     protected int getUniformLocation(String uniformName) {
         return GL20.glGetUniformLocation(programID, uniformName);
     }
 
-    protected abstract void getAllUniformLocations();
+    protected abstract void initUniforms();
 
     protected void loadFloat(int location, float value) {
         GL20.glUniform1f(location, value);
@@ -151,6 +151,10 @@ public abstract class ShaderProgram {
             System.exit(-1);
         }
         return shaderID;
+    }
+
+    public int getProgramID() {
+        return programID;
     }
 
 }
