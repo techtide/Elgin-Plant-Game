@@ -1,9 +1,12 @@
 package treeEngine.shaders.entities;
 
 import elgin.data.Reference;
+import org.lwjgl.util.vector.Matrix4f;
+import treeEngine.entities.Camera;
 import treeEngine.shaders.ShaderProgram;
 import treeEngine.shaders.uniforms.Uniform;
 import treeEngine.shaders.uniforms.UniformMat4;
+import treeEngine.toolbox.Maths;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,11 +16,13 @@ import java.util.HashMap;
  */
 public class EntityShader extends ShaderProgram {
 
+    public UniformMat4 transformationMatrix;
+    public UniformMat4 projectionMatrix;
+    public UniformMat4 viewMatrix;
+
     public EntityShader() {
         super(Reference.ENTITY_SHADER_VERTEX_FILE, Reference.ENTITY_SHADER_FRAGMENT_FILE);
     }
-
-    private HashMap<String, Uniform> uniformIndex = new HashMap<>();
 
     /**
      * Binds attributes for entityVSH.glsl
@@ -35,19 +40,14 @@ public class EntityShader extends ShaderProgram {
      */
     @Override
     protected void initUniforms() {
-        UniformMat4 transformationMatrix = new UniformMat4("transformationMatrix", this.getProgramID());
-        uniformIndex.put(transformationMatrix.getUniformName(), transformationMatrix);
+        transformationMatrix = new UniformMat4("transformationMatrix", this.getProgramID());
+        projectionMatrix = new UniformMat4("projectionMatrix", this.getProgramID());
+        viewMatrix = new UniformMat4("viewMatrix", this.getProgramID());
     }
 
-    /**
-     * Gets the uniform so you can load values to the shader.
-     * @param uniformName - Name of uniform you want
-     * @return - the uniform
-     */
-    protected Uniform getUniformVariable(String uniformName) {
-        Uniform uniform = uniformIndex.get(uniformName);
-
-        return uniform;
+    public void loadCameraViewMatrix(Camera camera) {
+        Matrix4f matrix = Maths.createViewMatrix(camera);
+        viewMatrix.loadData(matrix);
     }
 
 }

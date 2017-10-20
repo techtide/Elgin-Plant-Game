@@ -2,7 +2,6 @@ package treeEngine.rendering;
 
 import elgin.data.Reference;
 import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
 import org.lwjgl.opengl.*;
 import org.newdawn.slick.util.Log;
 

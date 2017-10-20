@@ -1,6 +1,5 @@
 package elgin.data;
 
-import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import java.awt.*;
@@ -16,6 +15,12 @@ public class Reference {
     //Master Renderer
     //For some reason if there isnt a skybox, this is the color it uses (Default AQUAish)
     public static final Vector4f DEFAULT_BACKGROUND_COLOR = new Vector4f(0.1f, 0.8f, 0.8f, 1f);
+    public static final float FOV = 70;
+    public static final float NEAR_PLANE = 0.1f;
+    public static final float FAR_PLANE = 1000f;
+
+    //Camera
+    public static final float CAM_SHIFT = 2.5f;
 
     //Loader
     public static final int LOADER_TEXTURES_FOLDER = 0; // Not needed just a default value.
