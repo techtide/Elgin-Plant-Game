@@ -1,0 +1,7 @@
+Name: Root
+Looks: Blue (#4084c4) and a black circle in the center
+Holds all plant data. You can refer back to it and look at what you have so far.
+Used to store plant samples.
+You can go on it and see what samples you have collected. 
+It will say number of plants out of total. Ex. 3/6
+You can go into a specific one and read data on it.
