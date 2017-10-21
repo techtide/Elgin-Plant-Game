@@ -1,7 +1,6 @@
 package treeEngine.shaders.uniforms;
 
 import org.lwjgl.opengl.GL20;
-import org.lwjgl.util.vector.Vector2f;
 
 public class UniformBool extends Uniform {
 

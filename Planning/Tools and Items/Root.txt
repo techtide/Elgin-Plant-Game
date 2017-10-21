@@ -1,0 +1,23 @@
+Name: Root
+Looks: Blue (#4084c4) and a black circle in the center
+
+WHAT IT DOES:
+Holds plant samples. Once a sample is collected, it will be put in the database.
+At any time, you can access it and it will show what you have collected.
+You will be able to also go into a specific one and it will show it's data. This data includes
+-Poisonous levels and effects
+-Area found
+-Scientific name
+-Name you have chosen
+
+It will also say how many plant samples you have out of all of them. (Ex. 3/6)
+If a plant swab is taken, it will show if it is poisonous or not.
+
+
+
+
+
+
+
+
+

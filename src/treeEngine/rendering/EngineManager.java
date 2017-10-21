@@ -1,9 +1,14 @@
 package treeEngine.rendering;
 
 import elgin.data.Reference;
+import org.lwjgl.util.vector.Vector3f;
+import treeEngine.entities.Camera;
+import treeEngine.entities.Entity;
 import treeEngine.models.ModelTexture;
 import treeEngine.models.RawModel;
 import treeEngine.models.TexturedModel;
+import treeEngine.objLoader.ModelData;
+import treeEngine.objLoader.OBJFileLoader;
 import treeEngine.shaders.entities.EntityShader;
 
 import java.util.ArrayList;
@@ -13,25 +18,89 @@ public class EngineManager {
 
     // Object inits essential for updates and others
     private static Loader loader;
-    private static Renderer renderer;
+    private static EntityRenderer renderer;
     private static EntityShader entityShader;
+    private static Camera camera;
 
-    private static List<TexturedModel> models = new ArrayList<>();
+    private static List<Entity> entities = new ArrayList<>();
 
     private static float[] vertices = {
-            -0.3f, 0.5f, 0f,
-            -0.3f, -0.5f, 0f,
-            0.3f, -0.5f, 0f,
-            0.3f, 0.5f, 0f
-    };
+            -0.5f,0.5f,-0.5f,
+            -0.5f,-0.5f,-0.5f,
+            0.5f,-0.5f,-0.5f,
+            0.5f,0.5f,-0.5f,
 
-    private static int[] indices = {
-            0, 1, 3,
-            3, 1, 2
+            -0.5f,0.5f,0.5f,
+            -0.5f,-0.5f,0.5f,
+            0.5f,-0.5f,0.5f,
+            0.5f,0.5f,0.5f,
+
+            0.5f,0.5f,-0.5f,
+            0.5f,-0.5f,-0.5f,
+            0.5f,-0.5f,0.5f,
+            0.5f,0.5f,0.5f,
+
+            -0.5f,0.5f,-0.5f,
+            -0.5f,-0.5f,-0.5f,
+            -0.5f,-0.5f,0.5f,
+            -0.5f,0.5f,0.5f,
+
+            -0.5f,0.5f,0.5f,
+            -0.5f,0.5f,-0.5f,
+            0.5f,0.5f,-0.5f,
+            0.5f,0.5f,0.5f,
+
+            -0.5f,-0.5f,0.5f,
+            -0.5f,-0.5f,-0.5f,
+            0.5f,-0.5f,-0.5f,
+            0.5f,-0.5f,0.5f
+
     };
 
     private static float[] textureCoords = {
-            0, 0,   0, 1,   1, 1,    1, 0
+
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0
+
+
+    };
+
+    private static int[] indices = {
+            0,1,3,
+            3,1,2,
+            4,5,7,
+            7,5,6,
+            8,9,11,
+            11,9,10,
+            12,13,15,
+            15,13,14,
+            16,17,19,
+            19,17,18,
+            20,21,23,
+            23,21,22
+
     };
 
     //END of inits
@@ -43,24 +112,30 @@ public class EngineManager {
     public static void init() {
         DisplayManager.createDisplay(); // Display
         loader = new Loader();
-        renderer = new Renderer();
         entityShader = new EntityShader();
+        renderer = new EntityRenderer(entityShader);
+        camera = new Camera();
 
-        RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("monkeyFace", Reference.LOADER_TEXTURES_FOLDER));
+        ModelData modelData = OBJFileLoader.loadOBJ("lowPolyTree");
+        RawModel model = loader.loadToVAO(modelData.getVertices(), modelData.getTextureCoords(), modelData.getIndices());
+        ModelTexture texture = new ModelTexture(loader.loadTexture("lowPolyTree", Reference.LOADER_TEXTURES_FOLDER));
         TexturedModel texturedModel = new TexturedModel(model, texture);
-        models.add(texturedModel);
+        entities.add(new Entity(texturedModel, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 0.05f));
     }
 
     /**
      * The running loop that updates all things that change.
      */
     public static void update() {
+        entities.get(0).increaseRotation(new Vector3f(0.5f, 0.5f, 0));
+        camera.move();
+
         //Game logic n stuff
         renderer.prepare();
         entityShader.start();
+        entityShader.loadCameraViewMatrix(camera);
 
-        renderer.render(models.get(0));
+        renderer.render(entities.get(0), entityShader);
 
         entityShader.stop();
         DisplayManager.updateDisplay(); // Display

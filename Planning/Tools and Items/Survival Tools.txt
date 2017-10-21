@@ -1,0 +1,16 @@
+Survival Tools:
+Torch (Base:#7c5c10- Flame:#ff8c00)
+- Can hold
+- Can be placed down around camp
+- Used to scare off animals
+
+Whistle (#d1cecc)
+-Used to scare off animals
+-Makes a sound higher than we can hear
+
+Axe (Base:#7c5c10- Head:#adacab)
+-Used to gather wood from trees
+
+Workbench (#e5c6a7)
+-Used to craft special items
+

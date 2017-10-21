@@ -1,0 +1,19 @@
+Plant Tools-
+Syringe
+(#dbd7d4)
+Used on plats to gather a sample
+Vial
+(Clear)
+Used to store plant samples in Root
+
+----------------------------------------------------------------------------------------------
+If you are collecting a sample from a poisonous plant:
+Thick Gloves (Equipped) 
+(#1e6323)
+Same Syringe
+Reinforced Vial
+(#605e5c, not clear)
+----------------------------------------------------------------------------------------------
+To swab a plant:
+Swabber (#e5e5e5)
+Used to tell if a plant is poisonous or not.
