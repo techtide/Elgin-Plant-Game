@@ -4,11 +4,13 @@ import elgin.data.Reference;
 import org.lwjgl.util.vector.Vector3f;
 import treeEngine.entities.Camera;
 import treeEngine.entities.Entity;
+import treeEngine.entities.Light;
 import treeEngine.models.ModelTexture;
 import treeEngine.models.RawModel;
 import treeEngine.models.TexturedModel;
 import treeEngine.objLoader.ModelData;
 import treeEngine.objLoader.OBJFileLoader;
+import treeEngine.shaders.UniformList;
 import treeEngine.shaders.entities.EntityShader;
 
 import java.util.ArrayList;
@@ -18,90 +20,11 @@ public class EngineManager {
 
     // Object inits essential for updates and others
     private static Loader loader;
-    private static EntityRenderer renderer;
-    private static EntityShader entityShader;
     private static Camera camera;
+    private static MasterRenderer renderer;
 
     private static List<Entity> entities = new ArrayList<>();
-
-    private static float[] vertices = {
-            -0.5f,0.5f,-0.5f,
-            -0.5f,-0.5f,-0.5f,
-            0.5f,-0.5f,-0.5f,
-            0.5f,0.5f,-0.5f,
-
-            -0.5f,0.5f,0.5f,
-            -0.5f,-0.5f,0.5f,
-            0.5f,-0.5f,0.5f,
-            0.5f,0.5f,0.5f,
-
-            0.5f,0.5f,-0.5f,
-            0.5f,-0.5f,-0.5f,
-            0.5f,-0.5f,0.5f,
-            0.5f,0.5f,0.5f,
-
-            -0.5f,0.5f,-0.5f,
-            -0.5f,-0.5f,-0.5f,
-            -0.5f,-0.5f,0.5f,
-            -0.5f,0.5f,0.5f,
-
-            -0.5f,0.5f,0.5f,
-            -0.5f,0.5f,-0.5f,
-            0.5f,0.5f,-0.5f,
-            0.5f,0.5f,0.5f,
-
-            -0.5f,-0.5f,0.5f,
-            -0.5f,-0.5f,-0.5f,
-            0.5f,-0.5f,-0.5f,
-            0.5f,-0.5f,0.5f
-
-    };
-
-    private static float[] textureCoords = {
-
-            0,0,
-            0,1,
-            1,1,
-            1,0,
-            0,0,
-            0,1,
-            1,1,
-            1,0,
-            0,0,
-            0,1,
-            1,1,
-            1,0,
-            0,0,
-            0,1,
-            1,1,
-            1,0,
-            0,0,
-            0,1,
-            1,1,
-            1,0,
-            0,0,
-            0,1,
-            1,1,
-            1,0
-
-
-    };
-
-    private static int[] indices = {
-            0,1,3,
-            3,1,2,
-            4,5,7,
-            7,5,6,
-            8,9,11,
-            11,9,10,
-            12,13,15,
-            15,13,14,
-            16,17,19,
-            19,17,18,
-            20,21,23,
-            23,21,22
-
-    };
+    private static Light sun;
 
     //END of inits
 
@@ -112,32 +35,33 @@ public class EngineManager {
     public static void init() {
         DisplayManager.createDisplay(); // Display
         loader = new Loader();
-        entityShader = new EntityShader();
-        renderer = new EntityRenderer(entityShader);
+        renderer = new MasterRenderer();
         camera = new Camera();
 
-        ModelData modelData = OBJFileLoader.loadOBJ("lowPolyTree");
-        RawModel model = loader.loadToVAO(modelData.getVertices(), modelData.getTextureCoords(), modelData.getIndices());
+        ModelData modelData = OBJFileLoader.loadOBJ("dragon");
+        RawModel model = loader.loadToVAO(modelData.getVertices(), modelData.getTextureCoords(), modelData.getNormals(), modelData.getIndices());
         ModelTexture texture = new ModelTexture(loader.loadTexture("lowPolyTree", Reference.LOADER_TEXTURES_FOLDER));
+        texture.setShineDamper(10);
+        texture.setReflectivty(0.5f);
         TexturedModel texturedModel = new TexturedModel(model, texture);
-        entities.add(new Entity(texturedModel, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 0.05f));
+        entities.add(new Entity(texturedModel, new Vector3f(0, -0.75f, -3), new Vector3f(0, 0, 0), 0.175f));
+
+        sun = new Light(new Vector3f(0, -5, 10), new Vector3f(1, 1, 1));
     }
 
     /**
      * The running loop that updates all things that change.
      */
     public static void update() {
-        entities.get(0).increaseRotation(new Vector3f(0.5f, 0.5f, 0));
+        entities.get(0).increaseRotation(new Vector3f(0f, 0.1f, 0));
         camera.move();
 
+        for(Entity e : entities) {
+            renderer.processEntity(e);
+        }
+
         //Game logic n stuff
-        renderer.prepare();
-        entityShader.start();
-        entityShader.loadCameraViewMatrix(camera);
-
-        renderer.render(entities.get(0), entityShader);
-
-        entityShader.stop();
+        renderer.render(sun, camera);
         DisplayManager.updateDisplay(); // Display
     }
 
@@ -145,7 +69,7 @@ public class EngineManager {
      * Cleans up everything to make the exit a smooth one.
      */
     public static void stop() {
-        entityShader.cleanUp();
+        renderer.cleanUp();
         loader.cleanUp();
         DisplayManager.closeDisplay(); // Display
     }

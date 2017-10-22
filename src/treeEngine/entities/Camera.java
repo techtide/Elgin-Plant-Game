@@ -4,6 +4,9 @@ import elgin.data.Reference;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
+/**
+ * Class to hold data for camera, to view the world
+ */
 public class Camera {
 
     private Vector3f position = new Vector3f(0, 0, 0);
