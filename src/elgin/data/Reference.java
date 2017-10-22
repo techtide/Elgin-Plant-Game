@@ -23,6 +23,10 @@ public class Reference {
     //Camera
     public static final float CAM_SHIFT = 2.5f;
 
+    //Terrains
+    public static final float TERRAIN_SIZE = 800;
+    public static final int TERRAIN_VERTEX_COUNT = 128;
+
     //OBJ Loader
     public static final String OBJ_LOADER_RES_LOC = "/assets/models/";
 
@@ -37,5 +41,8 @@ public class Reference {
     //Shaders
     public static final String ENTITY_SHADER_VERTEX_FILE = "/treeEngine/shaders/entities/entityVSH.glsl";
     public static final String ENTITY_SHADER_FRAGMENT_FILE = "/treeEngine/shaders/entities/entityFSH.glsl";
+
+    public static final String TERRAIN_SHADER_VERTEX_FILE = "/treeEngine/shaders/terrains/terrainVSH.glsl";
+    public static final String TERRAIN_SHADER_FRAGMENT_FILE = "/treeEngine/shaders/terrains/terrainFSH.glsl";
 
 }

@@ -1,6 +1,7 @@
 package treeEngine.shaders.entities;
 
 import elgin.data.Reference;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Matrix4f;
 import treeEngine.entities.Camera;
 import treeEngine.shaders.ShaderProgram;

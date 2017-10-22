@@ -12,6 +12,7 @@ import treeEngine.objLoader.ModelData;
 import treeEngine.objLoader.OBJFileLoader;
 import treeEngine.shaders.UniformList;
 import treeEngine.shaders.entities.EntityShader;
+import treeEngine.terrains.Terrain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,12 @@ public class EngineManager {
     private static MasterRenderer renderer;
 
     private static List<Entity> entities = new ArrayList<>();
+    private static List<Terrain> terrains = new ArrayList<>();
     private static Light sun;
 
     //END of inits
+
+    //TODO- Write creation class to easily make entities, forest n such
 
     /**
      * Initiates the display, OpenGL, and any other non-loop lines
@@ -46,7 +50,18 @@ public class EngineManager {
         TexturedModel texturedModel = new TexturedModel(model, texture);
         entities.add(new Entity(texturedModel, new Vector3f(0, -0.75f, -3), new Vector3f(0, 0, 0), 0.175f));
 
-        sun = new Light(new Vector3f(0, -5, 10), new Vector3f(1, 1, 1));
+        ModelData grassModelData = OBJFileLoader.loadOBJ("fern");
+        RawModel grassModel = loader.loadToVAO(grassModelData.getVertices(), grassModelData.getTextureCoords(), grassModelData.getNormals(), grassModelData.getIndices());
+        ModelTexture grassTexture = new ModelTexture(loader.loadTexture("fern", Reference.LOADER_TEXTURES_FOLDER));
+        grassTexture.setHasTransparency(true);
+        grassTexture.setUsesFakeLighting(true);
+        TexturedModel grassTexturedModel = new TexturedModel(grassModel, grassTexture);
+        entities.add(new Entity(grassTexturedModel, new Vector3f(5, 0, 5), new Vector3f(0, 0, 0), 1));
+
+        sun = new Light(new Vector3f(2000, 2000, 2000), new Vector3f(1, 1, 1));
+
+        Terrain terrain = new Terrain(0, -1, loader, new ModelTexture(loader.loadTexture("grass", Reference.LOADER_TEXTURES_FOLDER)));
+        terrains.add(terrain);
     }
 
     /**
@@ -58,6 +73,10 @@ public class EngineManager {
 
         for(Entity e : entities) {
             renderer.processEntity(e);
+        }
+
+        for(Terrain t : terrains) {
+            renderer.processTerrain(t);
         }
 
         //Game logic n stuff
