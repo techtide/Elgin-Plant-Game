@@ -14,7 +14,7 @@ public class Reference {
 
     //Master Renderer
     //For some reason if there isnt a skybox, this is the color it uses (Default AQUAish)
-    public static final Vector4f DEFAULT_BACKGROUND_COLOR = new Vector4f(0.1f, 0.8f, 0.8f, 1f);
+    public static final Vector4f DEFAULT_BACKGROUND_COLOR = new Vector4f(0.698f, 0.815f, 1f, 1f);
     public static final float FOV = 70;
     public static final float NEAR_PLANE = 0.1f;
     public static final float FAR_PLANE = 1000f;

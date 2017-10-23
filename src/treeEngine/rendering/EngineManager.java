@@ -1,17 +1,9 @@
 package treeEngine.rendering;
 
-import elgin.data.Reference;
 import org.lwjgl.util.vector.Vector3f;
 import treeEngine.entities.Camera;
 import treeEngine.entities.Entity;
 import treeEngine.entities.Light;
-import treeEngine.models.ModelTexture;
-import treeEngine.models.RawModel;
-import treeEngine.models.TexturedModel;
-import treeEngine.objLoader.ModelData;
-import treeEngine.objLoader.OBJFileLoader;
-import treeEngine.shaders.UniformList;
-import treeEngine.shaders.entities.EntityShader;
 import treeEngine.terrains.Terrain;
 import treeEngine.toolbox.Creation;
 
@@ -46,22 +38,22 @@ public class EngineManager {
         camera = new Camera();
 
         //dragon, lowPolyTree
-        Entity dragon = create.createEntity("dragon", "lowPolyTree", new Vector3f(10, 10, 10), 0, 0, 0, 1f);
+        Entity dragon = create.createEntity("dragon", "lowPolyTree", new Vector3f(10, 0, -10), 0, 0, 0, 1f);
         dragon.getModel().getTexture().setReflectivty(1);
         dragon.getModel().getTexture().setShineDamper(10);
         entities.add(dragon);
 
-        ModelData grassModelData = OBJFileLoader.loadOBJ("fern");
-        RawModel grassModel = loader.loadToVAO(grassModelData.getVertices(), grassModelData.getTextureCoords(), grassModelData.getNormals(), grassModelData.getIndices());
-        ModelTexture grassTexture = new ModelTexture(loader.loadTexture("fern", Reference.LOADER_TEXTURES_FOLDER));
-        grassTexture.setHasTransparency(true);
-        grassTexture.setUsesFakeLighting(true);
-        TexturedModel grassTexturedModel = new TexturedModel(grassModel, grassTexture);
-        entities.add(new Entity(grassTexturedModel, new Vector3f(5, 0, 5), new Vector3f(0, 0, 0), 1));
+        List<Entity> tempBatch = create.createScatterEntity("fern", "fern", 0, 0, 0,
+                0.9f, 400, 80, true);
+        for(Entity e: tempBatch) {
+            e.getModel().getTexture().setHasTransparency(true);
+            e.getModel().getTexture().setUsesFakeLighting(true);
+        }
+        entities.addAll(tempBatch);
 
         sun = new Light(new Vector3f(2000, 2000, 2000), new Vector3f(1, 1, 1));
 
-        Terrain terrain = new Terrain(0, -1, loader, new ModelTexture(loader.loadTexture("grass", Reference.LOADER_TEXTURES_FOLDER)));
+        Terrain terrain = create.createTerrain("grass", 0, -1);
         terrains.add(terrain);
     }
 

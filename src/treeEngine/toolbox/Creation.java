@@ -44,11 +44,10 @@ public class Creation {
             float xPos = r.nextFloat() * range;
             float zPos = r.nextFloat() * range;
 
-            Vector3f position = new Vector3f(xPos, 0, zPos); // Will change 0 when adding custom terrains
+            Vector3f position = new Vector3f(xPos, 0, -zPos); // Will change 0 when adding custom terrains
 
-            if(ignoreYAxis) {
-                dx = r.nextFloat() * 360;
-                dz = r.nextFloat() * 360;
+            if(!ignoreYAxis) {
+                dy = r.nextFloat() * 360;
             }
 
             entities.add(createEntity(modelPath, texturePath, position, dx, dy, dz, scale));
