@@ -13,6 +13,7 @@ import treeEngine.objLoader.OBJFileLoader;
 import treeEngine.shaders.UniformList;
 import treeEngine.shaders.entities.EntityShader;
 import treeEngine.terrains.Terrain;
+import treeEngine.toolbox.Creation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class EngineManager {
 
     // Object inits essential for updates and others
     private static Loader loader;
+    private static Creation create;
     private static Camera camera;
     private static MasterRenderer renderer;
 
@@ -39,16 +41,15 @@ public class EngineManager {
     public static void init() {
         DisplayManager.createDisplay(); // Display
         loader = new Loader();
+        create = new Creation(loader);
         renderer = new MasterRenderer();
         camera = new Camera();
 
-        ModelData modelData = OBJFileLoader.loadOBJ("dragon");
-        RawModel model = loader.loadToVAO(modelData.getVertices(), modelData.getTextureCoords(), modelData.getNormals(), modelData.getIndices());
-        ModelTexture texture = new ModelTexture(loader.loadTexture("lowPolyTree", Reference.LOADER_TEXTURES_FOLDER));
-        texture.setShineDamper(10);
-        texture.setReflectivty(0.5f);
-        TexturedModel texturedModel = new TexturedModel(model, texture);
-        entities.add(new Entity(texturedModel, new Vector3f(0, -0.75f, -3), new Vector3f(0, 0, 0), 0.175f));
+        //dragon, lowPolyTree
+        Entity dragon = create.createEntity("dragon", "lowPolyTree", new Vector3f(10, 10, 10), 0, 0, 0, 1f);
+        dragon.getModel().getTexture().setReflectivty(1);
+        dragon.getModel().getTexture().setShineDamper(10);
+        entities.add(dragon);
 
         ModelData grassModelData = OBJFileLoader.loadOBJ("fern");
         RawModel grassModel = loader.loadToVAO(grassModelData.getVertices(), grassModelData.getTextureCoords(), grassModelData.getNormals(), grassModelData.getIndices());
